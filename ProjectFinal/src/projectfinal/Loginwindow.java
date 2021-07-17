@@ -5,6 +5,12 @@
  */
 package projectfinal;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL
@@ -57,6 +63,11 @@ public class Loginwindow extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jButton1.setText("SIGNIN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jButton2.setText("RESET");
@@ -133,6 +144,36 @@ public class Loginwindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/logindata", "root","");
+            String sql = "Select * from mylog where UserName=? and Password=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username.getText());
+            pst.setString(2, password.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Your Username and password matched");
+                
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Your Username and password is not matched");
+                username.setText("");
+                password.setText("");
+            }
+            con.close();
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
