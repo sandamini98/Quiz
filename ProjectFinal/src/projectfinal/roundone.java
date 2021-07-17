@@ -82,6 +82,7 @@ public class roundone extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        final roundone scr=new roundone();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -108,9 +109,26 @@ public class roundone extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new roundone().setVisible(true);
+                scr.setVisible(true);
+                
             }
         });
+        firstquestion sc=new firstquestion();
+        try{
+            for(int i=0;i<=100;i++){
+            Thread.sleep(80);
+            scr.jProgressBar1.setValue(i);
+            
+            }
+            new roundone().setVisible(false);
+            
+            }
+        catch(Exception e){
+            
+        }
+        new firstquestion().setVisible(false);
+        sc.setVisible(true);
+scr.dispose();    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
