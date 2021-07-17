@@ -71,6 +71,11 @@ public class Loginwindow extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jButton2.setText("RESET");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("* Please fill all entries");
@@ -157,7 +162,9 @@ public class Loginwindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "Your Username and password matched");
-                
+                roundone menu = new roundone();
+                menu.setVisible(true);
+                setVisible(false);
                 
             }
             else{
@@ -174,6 +181,12 @@ public class Loginwindow extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Loginwindow sc=new Loginwindow();
+        new Loginwindow().setVisible(false);
+        sc.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
