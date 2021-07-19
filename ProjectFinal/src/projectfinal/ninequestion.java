@@ -6,8 +6,10 @@
 package projectfinal;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -92,6 +94,11 @@ public class ninequestion extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("Submit Answer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Check Answer");
@@ -174,6 +181,36 @@ public class ninequestion extends javax.swing.JFrame {
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         value = "Microprocessor";
     }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+           String submitQuery ="INSERT INTO `submittedanswer`(`sa`) VALUES (?)";
+           con = DriverManager.getConnection("jdbc:mysql://localhost/myquiz", "root", "");
+           pst =con.prepareStatement(submitQuery);
+           pst.setString(1, value);
+           pst.executeUpdate();
+           JOptionPane.showMessageDialog(this, "Your Answer is submitted Successfull");
+           String extractQuery="select submittedanswer.sa, answer.ans from answer inner join (select sa from submittedanswer order by id desc limit 1) as submittedanswer on submittedanswer.sa= answer.ans";
+           pst= con.prepareStatement(extractQuery);
+           rs=pst.executeQuery();
+           if(rs.next()){
+               
+           String valueQuery = "INSERT INTO Compare(value) VALUES(?)";
+           pst=con.prepareStatement(valueQuery);
+           pst.setString(1, "Correct");
+           pst.executeUpdate();}
+           else{
+           String valueQuery = "INSERT INTO compare(value) VALUES (?)";
+           pst= con.prepareStatement(valueQuery);
+           pst.setString(1, "INCORRECT");
+           pst.executeUpdate();}
+           
+           
+       }
+       catch(Exception ex){
+           
+       JOptionPane.showMessageDialog(this, ex.getMessage());}
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
