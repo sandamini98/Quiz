@@ -240,8 +240,8 @@ public class geoone extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        exitwindow sc=new exitwindow();
-        new exitwindow().setVisible(false);
+        geotwo sc=new geotwo();
+        new geotwo().setVisible(false);
         sc.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
