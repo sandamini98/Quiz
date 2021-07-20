@@ -102,9 +102,19 @@ public class ITone extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Check Answer");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton3.setText("Next");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -209,6 +219,30 @@ public class ITone extends javax.swing.JFrame {
            
        JOptionPane.showMessageDialog(this, ex.getMessage());}
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try{
+            String showQuery="select value from Compare order by id desc limit 1";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myquiz", "root", "");
+            pst= con.prepareStatement(showQuery);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                
+            String show = rs.getString("value");
+            JOptionPane.showMessageDialog(null, "Your submitted answer is"+show, "Information", JOptionPane.PLAIN_MESSAGE);
+            }
+            
+            
+        }catch(Exception ex){
+            
+        JOptionPane.showMessageDialog(this, ex.getMessage());}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ITtwo sc=new ITtwo();
+        new ITtwo().setVisible(false);
+        sc.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
