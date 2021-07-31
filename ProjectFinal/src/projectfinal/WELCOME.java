@@ -10,7 +10,7 @@ package projectfinal;
  * @author DELL
  */
 public class WELCOME extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form WELCOME
      */
